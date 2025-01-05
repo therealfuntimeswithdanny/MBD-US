@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-up Example</title>
+    <style>
+        /* Style for the pop-up */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p>This is your pop-up message!</p>
+            <button id="neverShowAgain">Never Show Again</button>
+            <button id="closePopup">Close</button>
+        </div>
+    </div>
+    <script>
+        // Function to show the pop-up
+        function showPopup() {
+            if (!localStorage.getItem('neverShowPopup')) {
+                document.getElementById('popup').style.display = 'block';
+            }
+        }
+
+        // Event listener for "Never Show Again" button
+        document.getElementById('neverShowAgain').addEventListener('click', function () {
+            localStorage.setItem('neverShowPopup', 'true');
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Event listener for "Close" button
+        document.getElementById('closePopup').addEventListener('click', function () {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Show the pop-up when the page loads
+        window.onload = showPopup;
+    </script>
+</body>
+</html>
